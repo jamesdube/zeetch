@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install and Build
-      - run: pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-exclude mkdocs-minify-plugin
+        run: pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-exclude mkdocs-minify-plugin
       - run: mkdocs build --site-dir public
 
       - name: Deploy preview
