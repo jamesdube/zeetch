@@ -8,7 +8,10 @@ on:
       - reopened
       - synchronize
       - closed
-
+      
+permissions:
+  contents: write
+  
 concurrency: preview-${{ github.ref }}
 
 jobs:
