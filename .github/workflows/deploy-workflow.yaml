@@ -1,11 +1,8 @@
 name: deploy-workflow
 
 on:
-  workflow_run:
-    workflows: [ "docs-workflow" ]
+  push:
     branches: [ main ]
-    types:
-      - completed
 
 permissions:
   contents: write
