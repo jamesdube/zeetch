@@ -19,7 +19,9 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: |
+          echo ${{ contains(fromJson('["opened", "synchronize"]'), github.event.action)  }}
+          echo "$GITHUB_CONTEXT"
       - name: Dump job context
         env:
           JOB_CONTEXT: ${{ toJson(job) }}
@@ -48,6 +50,7 @@ jobs:
           echo "The run id is: $GITHUB_RUN_ID"
           echo "The GitHub Actor's username is: $GITHUB_ACTOR"
           echo "GitHub SHA: $GITHUB_SHA"
+      
 
   build:
     if: github.event_name == 'pull_request' && contains(fromJson('["opened", "synchronize"]'), github.event.action)
