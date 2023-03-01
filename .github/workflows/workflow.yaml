@@ -16,7 +16,7 @@ jobs:
       - run: echo "github branch is:" ${{ github.ref_name }}
       - run: echo "is merged:" ${{ github.event.pull_request.merged }}
       - run: echo "is merged check:" ${{ github.event.pull_request.merged == true }}
-      - run: echo "is merged check (string):" ${{ github.event.pull_request.merged == 'true' }}
+      - run: echo "is merged check(string):" ${{ github.event.pull_request.merged == 'true' }}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
