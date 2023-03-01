@@ -2,11 +2,6 @@ name: docs-workflow
 
 on:
   push:
-  
-permissions:
-  contents: write
-  id-token: write
-  pages: write
 
 jobs:
 #   setup:
@@ -50,5 +45,9 @@ jobs:
     if: github.event_name == 'push' && github.ref_name == 'main'
     runs-on: ubuntu-22.04
     needs: [ build, test ]
+    permissions:
+      contents: write
+      id-token: write
+      pages: write
     steps:
       - uses: actions/checkout@v3
