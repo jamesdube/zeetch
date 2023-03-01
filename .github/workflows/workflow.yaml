@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
