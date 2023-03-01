@@ -14,6 +14,12 @@ jobs:
     steps:
       - run: echo "event name is:" ${{ github.event_name }} 
       - run: echo "event type is:" ${{ github.event.action }}
+      - run: echo "github branch head is:" ${{ github.event.ref }}
+      - run: echo "github branch is:" ${{ github.ref_name }}
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo  "$GITHUB_CONTEXT"
       
   build:
     if: github.event.pull_request.opened == 'true'
@@ -44,7 +50,7 @@ jobs:
           go-version: '1.18'
           
   deploy:
-    if: github.event.pull_request.merged == 'true'
+    if: github.event.pull_request.merged == 'true' && github.ref_name == 'main'
     runs-on: ubuntu-22.04
     needs: [ build, test ]
     steps:
