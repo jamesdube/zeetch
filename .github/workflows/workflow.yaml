@@ -15,7 +15,7 @@ jobs:
       - run: echo "event name is:" ${{ github.event_name }} 
       - run: echo "event type is:" ${{ github.event.action }}
       - run: echo "github branch is:" ${{ github.branch }}
-      - run: echo "github is:" ${{ github }}
+      - run: echo "github is:" ${{ toJson(github) }}
       
   build:
     if: github.event.pull_request.opened == 'true'
