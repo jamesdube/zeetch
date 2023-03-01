@@ -2,6 +2,8 @@ name: docs-workflow
 
 on:
   push:
+  pull_request:
+    types: [opened,synchronize]
 
 jobs: 
 
@@ -13,7 +15,9 @@ jobs:
       - run: echo "github branch head is:" ${{ github.event.ref }}
       - run: echo "github branch is:" ${{ github.ref_name }}
       - run: echo "is merge :" ${{github.event.pull_request.merged == true}}
-      - run: echo "pull_req value :" ${{toJson(github.event.pull_request)}}
+      - run: echo "pull_req value $PRCTX" 
+        env:
+          PRCTX: ${{ toJson(github.event.pull_request) }}
       - run: echo "action :" ${{github.event.action}}
       - name: Dump GitHub context
         env:
