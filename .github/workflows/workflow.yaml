@@ -15,12 +15,9 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo  "$GITHUB_CONTEXT"
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          echo ${{ contains(fromJson('["opened", "synchronize"]'), github.event.action)  }}
+          echo "is open or sync : ${{ contains(fromJson('["opened", "synchronize"]'), github.event.action)  }}"
+          echo "is pr : ${{ github.event_name == 'pull_request' }}"
           echo "$GITHUB_CONTEXT"
       - name: Dump job context
         env:
