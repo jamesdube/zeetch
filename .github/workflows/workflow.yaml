@@ -22,7 +22,6 @@ jobs:
         run: echo  "$GITHUB_CONTEXT"
       
   build:
-    if: github.event.pull_request.opened == 'true'
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -40,7 +39,6 @@ jobs:
         run: mkdocs build
 
   test:
-    if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
     runs-on: ubuntu-22.04
     needs: [ build ]
     steps:
