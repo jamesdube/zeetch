@@ -9,12 +9,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - run: echo "event name is:" ${{ github.event_name }} 
-      - run: echo "event type is:" ${{ github.event.action }}
+      - run: echo "event action is:" ${{ github.event.action }}
       - run: echo "github branch head is:" ${{ github.event.ref }}
       - run: echo "github branch is:" ${{ github.ref_name }}
       - run: echo "is merge :" ${{github.event.pull_request.merged == true}}
-      - run: echo "pull_req value :" ${{toJson(github.event.pull_request)}}
-      - run: echo "action :" ${{github.event.action}}
+      - run: echo "pull_req dump :" ${{toJson(github.event.pull_request)}}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
