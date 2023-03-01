@@ -9,6 +9,12 @@ permissions:
   pages: write
 
 jobs:
+  setup:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "event name is:" ${{ github.event_name }} 
+      - run: echo "event type is:" ${{ github.event.action }}
+      
   build:
     if: github.event.pull_request.opened == 'true'
     runs-on: ubuntu-22.04
