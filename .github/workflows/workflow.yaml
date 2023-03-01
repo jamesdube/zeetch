@@ -15,11 +15,10 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo  "$GITHUB_CONTEXT"
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: |
+          echo "is open or sync : ${{ contains(fromJson('["opened", "synchronize"]'), github.event.action)  }}"
+          echo "is pr : ${{ github.event_name == 'pull_request' }}"
+          echo "$GITHUB_CONTEXT"
       - name: Dump job context
         env:
           JOB_CONTEXT: ${{ toJson(job) }}
@@ -48,6 +47,7 @@ jobs:
           echo "The run id is: $GITHUB_RUN_ID"
           echo "The GitHub Actor's username is: $GITHUB_ACTOR"
           echo "GitHub SHA: $GITHUB_SHA"
+      
 
   build:
     if: github.event_name == 'pull_request' && contains(fromJson('["opened", "synchronize"]'), github.event.action)
@@ -79,7 +79,6 @@ jobs:
   deploy:
     if: github.event_name == 'push' && github.ref_name == 'main'
     runs-on: ubuntu-22.04
-    needs: [ build, test ]
     permissions:
       contents: write
       id-token: write
