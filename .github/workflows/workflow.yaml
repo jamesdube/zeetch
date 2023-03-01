@@ -12,6 +12,8 @@ jobs:
       - run: echo "event type is:" ${{ github.event.action }}
       - run: echo "github branch head is:" ${{ github.event.ref }}
       - run: echo "github branch is:" ${{ github.ref_name }}
+      - run: echo "is merge :" ${{github.event.pull_request.merged == true}}
+      - run: echo "pull_req value :" ${{toJson(github.event.pull_request)}}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
