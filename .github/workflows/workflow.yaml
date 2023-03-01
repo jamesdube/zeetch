@@ -3,7 +3,7 @@ name: docs-workflow
 on:
   push:
   pull_request:
-    types: [opened,synchronize]
+    types: [opened,synchronize,closed]
 
 jobs: 
 
