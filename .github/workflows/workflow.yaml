@@ -7,6 +7,21 @@ on:
 
 jobs: 
 
+  setup:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "event name is:" ${{ github.event_name }} 
+      - run: echo "event type is:" ${{ github.event.action }}
+      - run: echo "github branch head is:" ${{ github.event.ref }}
+      - run: echo "github branch is:" ${{ github.ref_name }}
+      - run: echo "is merged:" ${{ github.event.pull_request.merged }}
+      - run: echo "is merged check:" ${{ github.event.pull_request.merged == true }}
+      - run: echo "is merged check (string):" ${{ github.event.pull_request.merged == 'true' }}
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo  "$GITHUB_CONTEXT"
+
   build:
     if: github.event_name == 'pull_request' && contains(fromJson('["opened", "synchronize"]'), github.event.action)
     runs-on: ubuntu-22.04
@@ -36,7 +51,7 @@ jobs:
           
   deploy:
     #if: github.event_name == 'pull_request' && github.ref_name == 'main' && github.event.pull_request.merged == 'true'
-    if: github.event_name == 'pull_request' && github.ref_name == 'main' && github.event.pull_request.merged == true
+    if: github.event_name == 'pull_request' && github.ref_name == 'main' 
     runs-on: ubuntu-22.04
     permissions:
       contents: write
