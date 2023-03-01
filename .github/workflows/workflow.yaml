@@ -14,6 +14,7 @@ jobs:
       - run: echo "github branch is:" ${{ github.ref_name }}
       - run: echo "is merge :" ${{github.event.pull_request.merged == true}}
       - run: echo "pull_req value :" ${{toJson(github.event.pull_request)}}
+      - run: echo "action :" ${{github.event.action}}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
