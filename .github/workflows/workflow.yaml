@@ -1,6 +1,7 @@
 name: docs-workflow
 
 on:
+  push:
   pull_request:
     types: [opened,synchronize,closed]
 
