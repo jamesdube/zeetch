@@ -9,17 +9,17 @@ permissions:
   pages: write
 
 jobs:
-  setup:
-    runs-on: ubuntu-22.04
-    steps:
-      - run: echo "event name is:" ${{ github.event_name }} 
-      - run: echo "event type is:" ${{ github.event.action }}
-      - run: echo "github branch head is:" ${{ github.event.ref }}
-      - run: echo "github branch is:" ${{ github.ref_name }}
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo  "$GITHUB_CONTEXT"
+#   setup:
+#     runs-on: ubuntu-22.04
+#     steps:
+#       - run: echo "event name is:" ${{ github.event_name }} 
+#       - run: echo "event type is:" ${{ github.event.action }}
+#       - run: echo "github branch head is:" ${{ github.event.ref }}
+#       - run: echo "github branch is:" ${{ github.ref_name }}
+#       - name: Dump GitHub context
+#         env:
+#           GITHUB_CONTEXT: ${{ toJson(github) }}
+#         run: echo  "$GITHUB_CONTEXT"
       
   build:
     runs-on: ubuntu-22.04
@@ -28,13 +28,12 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: 3.x
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           key: ${{ github.ref }}
           path: .cache
       - name: install dependencies
         run: pip install -r requirements.txt
-
       - name: build docs
         run: mkdocs build
 
