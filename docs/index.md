@@ -1,6 +1,6 @@
 # Welcome to Zeetch
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Worlds best site
 
 ## Commands
 
