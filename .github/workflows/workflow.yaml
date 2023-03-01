@@ -14,7 +14,8 @@ jobs:
     steps:
       - run: echo "event name is:" ${{ github.event_name }} 
       - run: echo "event type is:" ${{ github.event.action }}
-      - run: echo "github branch is:" ${{ github.branch }}
+      - run: echo "github branch head is:" ${{ github.event.ref }}
+      - run: echo "github branch is:" ${{ github.event.ref_name }}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
