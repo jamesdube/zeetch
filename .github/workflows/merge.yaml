@@ -8,8 +8,6 @@ on:
       - main
 
 jobs:
-  build:
-    uses: .github/workflows/.pull-request.yaml
   deploy:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-22.04
