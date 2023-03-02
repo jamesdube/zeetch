@@ -1,0 +1,33 @@
+
+name: pull-request
+
+on:
+  pull_request:
+    types: [opened,synchronize]
+
+jobs:
+  build:
+    if: github.event_name == 'pull_request' && github.ref_name == 'main' && github.event.pull_request.merged == true
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - uses: actions/cache@v3
+        with:
+          key: ${{ github.ref }}
+          path: .cache
+      - name: install dependencies
+        run: pip install -r requirements.txt
+      - name: build docs
+        run: mkdocs build
+
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.18'
+          
