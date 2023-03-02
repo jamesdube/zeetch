@@ -20,7 +20,7 @@ jobs:
       - name: install dependencies
         run: pip install -r requirements.txt
       - name: build docs
-        run: mkdocs build
+        run: mkdocs build --dir foo
 
   test:
     runs-on: ubuntu-22.04
