@@ -4,13 +4,17 @@ name: merge
 on:
   pull_request:
     types: [closed]
-    branch: main
+    branches: 
+      - main
+  workflow_run:
+    workflows: ["pull-request"]
+    types:
+      - completed
 
 jobs:
   deploy:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-22.04
-    needs: [ build ]
     permissions:
       contents: write
       id-token: write
