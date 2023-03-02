@@ -23,7 +23,7 @@ jobs:
 #         run: echo  "$GITHUB_CONTEXT"
 
   build:
-    if: github.event_name == 'pull_request' && contains(fromJson('["opened", "synchronize"]'), github.event.action)
+    if: github.event_name == 'pull_request' && contains(fromJson('["opened", "synchronize"]'), github.event.action) || github.event_name == 'pull_request' && github.ref_name == 'main' && github.event.pull_request.merged == true
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
