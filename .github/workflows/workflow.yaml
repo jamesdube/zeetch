@@ -2,11 +2,13 @@
 name: docs
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     types:
       - opened
       - synchronize
-      - closed
 
 jobs:
 
@@ -28,7 +30,7 @@ jobs:
         run: echo "make build-docs"
 
   deploy:
-    if: github.event.pull_request.merged == true && github.ref_name == 'main'
+    if: github.event_name == 'push' && github.ref_name == 'main'
     runs-on: ubuntu-22.04
     steps:
       - name: checkout
