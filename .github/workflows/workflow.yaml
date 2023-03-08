@@ -9,7 +9,6 @@ on:
       - closed
 
 jobs:
-
   test:
     if: github.event_name == 'pull_request' && contains(fromJson('["opened", "synchronize"]'), github.event.action)
     runs-on: ubuntu-22.04
