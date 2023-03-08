@@ -1,6 +1,6 @@
 # Welcome to Zeetch
 
-Worlds best site
+Worlds best site by James
 
 ## Commands
 
