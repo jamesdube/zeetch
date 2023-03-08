@@ -13,7 +13,6 @@ on:
 jobs:
 
   test:
-    if: github.event_name == 'pull_request' && contains(fromJson('["opened", "synchronize"]'), github.event.action)
     runs-on: ubuntu-22.04
     steps:
       - name: checkout
@@ -32,6 +31,8 @@ jobs:
   deploy:
     if: github.event_name == 'push' && github.ref_name == 'main'
     runs-on: ubuntu-22.04
+    needs:
+      - test
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -42,7 +43,7 @@ jobs:
       - name: dependencies
         run: pip install -r requirements.txt
       - name: build
-        run: echo "make build-docs"
+        run: mkdocs build
       - name: upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
