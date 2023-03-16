@@ -32,6 +32,15 @@ jobs:
         with:
           name: docs
           path: site/
+          
+  deploy-test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: preveiw
+        run: echo "preview"
+      - name: upload
+        if: github.event_name == 'push' && github.ref_name == 'main'
+        run: echo "upload"
 
   deploy:
     if: github.event_name == 'push' && github.ref_name == 'main'
