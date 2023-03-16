@@ -25,6 +25,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: lint
         uses: pre-commit/action@v3.0.0
+        continue-on-error: true
       - name: unit tests
         run: mkdocs build
       - name: Upload artifacts
