@@ -43,34 +43,28 @@ jobs:
         run: echo "upload"
 
   deploy:
-    if: github.event_name == 'push' && github.ref_name == 'main'
     permissions:
-#       contents: write
       id-token: write
       pages: write
     runs-on: ubuntu-22.04
     needs:
       - test
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: docs
           path: site/
-#       - name: prepare environment
-#         uses: actions/setup-python@v4
-#         with:
-#           python-version: 3.10.10
-#       - name: dependencies
-#         run: pip install -r requirements.txt
-#       - name: build
-#         run: mkdocs build
+      - name: preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./site/
       - name: upload pages artifact
+        if: github.event_name == 'push' && github.ref_name == 'main'
         uses: actions/upload-pages-artifact@v1
         with:
           path: 'site/'
       - name: deploy to gitHub pages
+        if: github.event_name == 'push' && github.ref_name == 'main'
         id: deployment
         uses: actions/deploy-pages@v1
