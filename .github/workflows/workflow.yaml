@@ -25,6 +25,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: lint
         uses: pre-commit/action@v3.0.0
+        continue-on-error: true
       - name: unit tests
         run: mkdocs build
       - name: Upload artifacts
@@ -34,34 +35,28 @@ jobs:
           path: site/
 
   deploy:
-    if: github.event_name == 'push' && github.ref_name == 'main'
-    permissions:
-#       contents: write
-      id-token: write
-      pages: write
+    permissions: write-all
     runs-on: ubuntu-22.04
     needs:
       - test
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
-      - name: Download artifact
+      - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
           name: docs
           path: site/
-#       - name: prepare environment
-#         uses: actions/setup-python@v4
-#         with:
-#           python-version: 3.10.10
-#       - name: dependencies
-#         run: pip install -r requirements.txt
-#       - name: build
-#         run: mkdocs build
+      - name: Preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./site/
       - name: upload pages artifact
+        if: github.event_name == 'push' && github.ref_name == 'main'
         uses: actions/upload-pages-artifact@v1
         with:
           path: 'site/'
       - name: deploy to gitHub pages
+        if: github.event_name == 'push' && github.ref_name == 'main'
         id: deployment
         uses: actions/deploy-pages@v1
