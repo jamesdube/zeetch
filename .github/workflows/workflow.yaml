@@ -40,12 +40,14 @@ jobs:
     needs:
       - test
     steps:
-      - name: Download artifact
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
           name: docs
           path: site/
-      - name: preview
+      - name: Preview
         uses: rossjrw/pr-preview-action@v1
         with:
           source-dir: ./site/
