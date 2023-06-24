@@ -11,23 +11,13 @@ on:
       - synchronize
 
 jobs:
-
-  localhost-1:
+  localhost:
     runs-on: ubuntu-22.04
     services:
       stripe:
         image: stripemock/stripe-mock
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: test service
-        run: |
-          curl -vv localhost:12111
-  localhost-2:
-    runs-on: ubuntu-22.04
-    services:
-      stripe:
-        image: stripemock/stripe-mock
+        volumes:
+          - ${{ github.workspace }}/mkdocs.yml:/tmp/mkdocs.yml
         ports:
           - 12111:12111
     steps:
@@ -36,27 +26,3 @@ jobs:
       - name: test service
         run: |
           curl -vv localhost:12111
-  domain-1:
-    runs-on: ubuntu-22.04
-    services:
-      stripe:
-        image: stripemock/stripe-mock
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: test service
-        run: |
-          curl -vv stripe:12111
-  domain-2:
-    runs-on: ubuntu-22.04
-    services:
-      stripe:
-        image: stripemock/stripe-mock
-        ports:
-          - 12111:12111
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: test service
-        run: |
-          curl -vv stripe:12111
