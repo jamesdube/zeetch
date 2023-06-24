@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-22.04
     services:
       stripe:
-        image: stripemock/stripe-mock
+        image: softwaremill/elasticmq-native
         volumes:
-          - ${{ github.workspace }}/mkdocs.yml:/tmp/mkdocs.yml
+          - ${{ github.workspace }}/mkdocs.yml:/opt/elasticmq.conf
         ports:
           - 12111:12111
     steps:
