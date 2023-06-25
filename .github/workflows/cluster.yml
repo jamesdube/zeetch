@@ -14,23 +14,15 @@ jobs:
   localhost:
     runs-on: ubuntu-22.04
     steps:
-      - id: env-setup
+      - name: Create
+        id: env-setup
         run: |
           echo "env_token=production" >> $GITHUB_OUTPUT
-      - run: |
-          echo "${{ steps.env-setup.outputs.env_token }}"
-      - name: Check for outdated packages
-        id: vars
+      - name: Get
         run: |
-           OUTDATED=true|| true
-           echo "OUTDATED={OUTDATED}" >> $GITHUB_OUTPUT
-      - name: Upgrade
-        run: echo ${{ steps.vars.outputs.cluster_id_computed }}
+          echo "${{ steps.env-setup.outputs.env_token }}"
       - name: Create cluster ID
         run: |
-          export suffix=artefact-test-dummy
-          #export cluster_id_computed=(ci-${{github.event.number}}-$suffix)
-          export cluster_id_computed=ci-123-dummy
           echo "cluster_id_computed=baz" >> $GITHUB_OUTPUT
         shell: bash
       - name: Check cluster ID
