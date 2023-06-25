@@ -19,7 +19,7 @@ jobs:
           export suffix=artefact-test-dummy
           #export cluster_id_computed=(ci-${{github.event.number}}-$suffix)
           export cluster_id_computed=ci-123-dummy
-          echo "cluster_id_computed=$cluster_id_computed" >> $GITHUB_OUTPUT
+          echo "cluster_id_computed=${cluster_id_computed}" >> $GITHUB_OUTPUT
         shell: bash
       - name: Check cluster ID
         id: test-artefact
