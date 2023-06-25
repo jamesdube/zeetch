@@ -14,12 +14,10 @@ jobs:
   localhost:
     runs-on: ubuntu-22.04
     services:
-      stripe:
+      elasticmq:
         image: softwaremill/elasticmq-native
         volumes:
-          - mkdocs.yml:/opt/docker/conf/elasticmq.conf
-        ports:
-          - 12111:12111
+          - mkdocs.yml:/opt/elasticmq.conf
     steps:
       - name: checkout
         uses: actions/checkout@v3
