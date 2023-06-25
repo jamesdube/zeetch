@@ -22,9 +22,9 @@ jobs:
         run: |
           echo "${{ steps.env-setup.outputs.env_token }}"
       - name: Create cluster ID
+        id: test-artefact
         run: |
           echo "cluster_id_computed=baz" >> $GITHUB_OUTPUT
       - name: Check cluster ID
-        id: test-artefact
         run: |
           echo ${{ steps.test-artefact.outputs.cluster_id_computed }}
