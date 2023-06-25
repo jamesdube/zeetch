@@ -14,6 +14,11 @@ jobs:
   localhost:
     runs-on: ubuntu-22.04
     steps:
+      - id: env-setup
+        run: |
+          echo "env_token=production" >> $GITHUB_OUTPUT
+      - run: |
+          echo "${{ steps.env-setup.outputs.env_token }}"
       - name: Check for outdated packages
         id: vars
         run: |
