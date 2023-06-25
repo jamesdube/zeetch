@@ -22,5 +22,10 @@ jobs:
         uses: unfor19/install-aws-cli-action@master
         with:
           version: 2
+      - name: Check version
       - run: aws --version
         shell: bash
+      - name: Creat SQS queue
+      - run: aws sqs create-queue --queue-name sreeQ --endpoint http://localhost:9324 --region eu-west-1
+        shell: bash
+      
