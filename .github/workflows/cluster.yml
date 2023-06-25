@@ -27,5 +27,5 @@ jobs:
         shell: bash
       - name: Check cluster ID
         id: test-artefact
-        run: echo ${{ steps.test-artefact.outputs.cluster_id_computed }}
-        shell: bash
+        run: |
+          echo ${{ steps.test-artefact.outputs.cluster_id_computed }}
