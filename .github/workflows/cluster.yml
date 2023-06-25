@@ -14,12 +14,19 @@ jobs:
   localhost:
     runs-on: ubuntu-22.04
     steps:
+      - name: Create
+        id: env-setup
+        run: |
+          echo "env_token=production" >> $GITHUB_OUTPUT
+      - name: Get
+        run: |
+          echo "${{ steps.env-setup.outputs.env_token }}"
       - name: Create cluster ID
+        id: test-artefact
         run: |
           export suffix=artefact-test-dummy
           export cluster_id_computed=ci-${{github.event.number}}-${suffix}
-          echo $cluster_id_computed >> $GITHUB_OUTPUT
+          echo "cluster_id_computed=${cluster_id_computed}" >> $GITHUB_OUTPUT
       - name: Check cluster ID
-        id: test-artefact
-        run: echo ${{ steps.test-artefact.outputs.cluster_id_computed }}
-        shell: bash
+        run: |
+          echo ${{ steps.test-artefact.outputs.cluster_id_computed }}
