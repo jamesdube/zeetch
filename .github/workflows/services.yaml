@@ -27,7 +27,10 @@ jobs:
         shell: bash
       - name: Creat SQS queue
         run: |
-          aws configure
           aws sqs create-queue --queue-name sreeQ --endpoint http://localhost:9324 --region eu-west-1
         shell: bash
+        env:
+          AWS_ACCESS_KEY_ID: dummy
+          AWS_SECRET_ACCESS_KEY: dummy
+          AWS_DEFAULT_REGION: 'eu-west-1'
       
