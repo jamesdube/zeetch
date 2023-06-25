@@ -13,12 +13,14 @@ on:
 jobs:
   localhost:
     runs-on: ubuntu-22.04
-    container:
-      image: softwaremill/elasticmq-native
-      volumes:
-          - ${{ github.workspace }}/config:/opt
+    services:
+      elasticmq:
+        image: softwaremill/elasticmq-native
     steps:
-      - name: Check cosmos config file
-        run: |
-          ls -al /opt
-          cat  /opt/elasticmq.conf
+      - name: Install aws-cli
+        id: install-aws-cli
+        uses: unfor19/install-aws-cli-action@master
+        with:
+          version: 2
+      - run: aws --version
+        shell: bash
