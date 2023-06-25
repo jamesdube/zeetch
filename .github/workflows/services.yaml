@@ -16,6 +16,8 @@ jobs:
     services:
       elasticmq:
         image: softwaremill/elasticmq-native
+        ports:
+          - 9324:9324
     steps:
       - name: Install aws-cli
         id: install-aws-cli
@@ -27,7 +29,8 @@ jobs:
         shell: bash
       - name: Creat SQS queue
         run: |
-          aws sqs create-queue --queue-name sreeQ --endpoint http://elasticmq:9324 --region eu-west-1
+          curl -vv localhost:9324
+          aws sqs create-queue --queue-name sreeQ --endpoint http://localhost:9324 --region eu-west-1
         shell: bash
         env:
           AWS_ACCESS_KEY_ID: dummy
