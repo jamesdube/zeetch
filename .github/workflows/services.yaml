@@ -17,7 +17,7 @@ jobs:
       stripe:
         image: softwaremill/elasticmq-native
         volumes:
-          - ${{ github.workspace }}/mkdocs.yml:/opt/docker/conf/elasticmq.conf
+          - mkdocs.yml:/opt/docker/conf/elasticmq.conf
         ports:
           - 12111:12111
     steps:
