@@ -24,7 +24,6 @@ jobs:
       - name: Create cluster ID
         run: |
           echo "cluster_id_computed=baz" >> $GITHUB_OUTPUT
-        shell: bash
       - name: Check cluster ID
         id: test-artefact
         run: |
