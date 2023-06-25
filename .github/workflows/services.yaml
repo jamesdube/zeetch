@@ -13,14 +13,12 @@ on:
 jobs:
   localhost:
     runs-on: ubuntu-22.04
-    services:
-      elasticmq:
-        image: softwaremill/elasticmq-native
-        volumes:
+    container:
+      image: softwaremill/elasticmq-native
+      volumes:
           - ${{ github.workspace }}/config:/opt
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: test service
+      - name: Check cosmos config file
         run: |
-          curl -vv localhost:12111
+          ls -al /opt
+          cat  /opt/elasticmq.conf
