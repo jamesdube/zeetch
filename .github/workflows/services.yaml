@@ -17,7 +17,7 @@ jobs:
       elasticmq:
         image: softwaremill/elasticmq-native
         volumes:
-          - docs2:/opt
+          - ${{ github.workspace }}/config:/opt
     steps:
       - name: checkout
         uses: actions/checkout@v3
