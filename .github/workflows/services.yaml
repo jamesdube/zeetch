@@ -17,7 +17,7 @@ jobs:
       elasticmq:
         image: softwaremill/elasticmq-native
         volumes:
-          - mkdocs.yml:/opt/elasticmq.conf
+          - docs:/opt
     steps:
       - name: checkout
         uses: actions/checkout@v3
