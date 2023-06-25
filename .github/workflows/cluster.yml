@@ -1,0 +1,25 @@
+
+name: cluster
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  localhost:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Create cluster ID
+        run: |
+          export suffix=artefact-test-dummy
+          export cluster_id_computed=ci-${{github.event.number}}-${suffix}
+          echo $cluster_id_computed >> $GITHUB_OUTPUT
+      - name: Check cluster ID
+        id: test-artefact
+        run: echo ${{ steps.test-artefact.outputs.cluster_id_computed }}
+        shell: bash
