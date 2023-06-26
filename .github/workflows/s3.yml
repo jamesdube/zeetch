@@ -29,3 +29,6 @@ jobs:
           echo ${{ steps.test-artefact.outputs.dest }}
           echo ${{ steps.test-artefact.outputs.path }}
         shell: bash
+      - name: Container
+        run: |
+          docker run --rm -d alpine
