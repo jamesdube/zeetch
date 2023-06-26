@@ -9,7 +9,9 @@ on:
     types:
       - opened
       - synchronize
-
+env:
+  STRIP_PATH: "/assets"
+  URL: "/assets/images/foo"
 jobs:
   localhost:
     runs-on: ubuntu-22.04
@@ -19,7 +21,11 @@ jobs:
         run: |
           export dest="production"
           if [ ${{ github.event_name }} == 'pull_request' ]; then export dest="staging" ; fi
+          export path=$(echo ${{en.URL}} | sed 's/assets//')
           echo dest="$dest" >> $GITHUB_OUTPUT
+          echo path="$path" >> $GITHUB_OUTPUT
       - name: Check cluster ID
-        run: echo ${{ steps.test-artefact.outputs.dest }}
+        run: |
+          echo ${{ steps.test-artefact.outputs.dest }}
+          echo ${{ steps.test-artefact.outputs.path }}
         shell: bash
