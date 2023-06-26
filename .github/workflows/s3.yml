@@ -17,7 +17,6 @@ jobs:
       - name: Build name
         run: |
           dest="production"
-          if [ github.event_name != 'pull_request'
           if [ ${{ github.event_name }} == 'pull_request' ]; then dest="staging" ; fi
           echo dest="$dest" >> $GITHUB_OUTPUT
       - name: Check cluster ID
