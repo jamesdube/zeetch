@@ -21,7 +21,7 @@ jobs:
         run: |
           export dest="production"
           if [ ${{ github.event_name }} == 'pull_request' ]; then export dest="staging" ; fi
-          export path=$(echo ${{env.URL}} | sed 's/assets//')
+          export path=$(echo ${{env.URL}} | sed 's/\/assets//')
           echo dest="$dest" >> $GITHUB_OUTPUT
           echo path="$path" >> $GITHUB_OUTPUT
       - name: Check cluster ID
