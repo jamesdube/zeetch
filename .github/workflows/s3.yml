@@ -15,11 +15,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Build name
+        id: test-artefact
         run: |
           export dest="production"
           #if [ ${{ github.event_name }} == 'pull_request' ]; then export dest="staging" ; fi
           echo dest="$dest" >> $GITHUB_OUTPUT
       - name: Check cluster ID
-        id: test-artefact
         run: echo ${{ steps.test-artefact.outputs.dest }}
         shell: bash
