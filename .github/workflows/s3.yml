@@ -17,7 +17,7 @@ jobs:
       - name: Build name
         run: |
           export dest="production"
-          if [ ${{ github.event_name }} == 'pull_request' ]; then export dest="staging" ; fi
+          #if [ ${{ github.event_name }} == 'pull_request' ]; then export dest="staging" ; fi
           echo dest="$dest" >> $GITHUB_OUTPUT
       - name: Check cluster ID
         id: test-artefact
