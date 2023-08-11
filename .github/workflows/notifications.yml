@@ -18,6 +18,7 @@ jobs:
         run: |
           echo setup
       - name: notify
+        if: always()
         run: |
           false
       - name: post notify
