@@ -19,6 +19,7 @@ jobs:
           echo setup
       - name: notify
         if: always()
+        continue-on-error: true
         run: |
           false
       - name: post notify
