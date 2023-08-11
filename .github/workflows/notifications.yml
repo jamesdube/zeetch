@@ -1,0 +1,24 @@
+
+name: notifications
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+jobs:
+  notifications:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: setup
+        run: |
+          echo setup
+      - name: notify
+        run: |
+          false
+      - name: post notify
+        run: |
+          echo done
