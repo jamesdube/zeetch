@@ -1,0 +1,40 @@
+
+name: notifications
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+jobs:
+  notifications:
+    runs-on: ubuntu-22.04
+    if: always()
+    steps:
+      - name: setup
+        run: |
+          echo setup
+      - name: notify
+        run: |
+          false
+      - name: post notify
+        if: always()
+        run: |
+          echo done
+      - name: foobar
+        if: always()
+        run: |
+          set +e
+          set +o pipefail
+
+          function wrap_command() {
+            hjhj
+            return $?
+          }
+
+          wrap_command
+          echo $?
+          exit 0
