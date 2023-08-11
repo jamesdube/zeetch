@@ -12,6 +12,7 @@ on:
 jobs:
   notifications:
     runs-on: ubuntu-22.04
+    if: always()
     steps:
       - name: setup
         run: |
