@@ -24,3 +24,16 @@ jobs:
         if: always()
         run: |
           echo done
+      - name: foobar
+        run: |
+          set +e
+          set +o pipefail
+
+          function wrap_command() {
+            hjhj
+            return $?
+          }
+
+          wrap_command
+          echo $?
+          exit 0
