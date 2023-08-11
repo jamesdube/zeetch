@@ -25,6 +25,7 @@ jobs:
         run: |
           echo done
       - name: foobar
+        if: always()
         run: |
           set +e
           set +o pipefail
